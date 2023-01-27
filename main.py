@@ -71,6 +71,8 @@ def handle_message(event):
         q = t.removeprefix(fake_metioned).strip()
         reply = getChatGPTMessage(q)
         print(reply)
+        while reply.startswith("\n"):
+            reply = reply.removeprefix("\n")
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=reply))
